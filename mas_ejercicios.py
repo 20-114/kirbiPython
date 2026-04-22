@@ -61,10 +61,15 @@ Crear un pin y que este
 tenga exactamente 4 digitos
 '''
 
-pin = input("Cree su pin con 4 digitos: ")
+# pin = input("Cree su pin con 4 digitos: ")
 
-if len(pin) == 4:
-    print("Pin creado corectamente")
-    pinn = int(pin)
-else:
-    print("Su pin no cumple con los 4 digitos")
+# if len(pin) == 4:
+#     print("Pin creado corectamente")
+#     pinn = int(pin)
+# else:
+#     print("Su pin no cumple con los 4 digitos")
+
+# ------------------------------------------------------- MATCH
+
+
+
