@@ -1,63 +1,66 @@
-
-
-productos = [
-
-]
-op = 0
+from productos_tienda import productos
+canasta = []
+total_productos_canasta = 0
+total_pagar = 0
+print("-"*25)
+print("SuperEccomers")
 while True:
     try:
-        try:
-            print("-"*25)
-            print(f"1. Agregar producto \n2. Mostrar productos \n3. Eliminar productos \n4. Salir")
-            op = int(input("Seleccione una opción "))
-        except ValueError:
-            print("Solo ingresar los opciones del menú")
+        op = int(input("1. Agregar producto a la canasta \n2. Ver canasta \n3. Salir de la tienda \n : "))
         match op:
             case 1:
                 while True:
-                    print("-"*25)
-                    nombre = input("Ingresa el producto que quieres agregar \nPara volver al menú principal ingresa -> back \n : ").lower()
-                    if nombre != "back":
-                        while True:
-                            try:
-                                precio = int(input(f"Ingresa el precio de {nombre}: "))
-                                if precio < 0:
-                                    print("Solo puedes ingresar números enteros positivos")
-                                    continue
-                                break
-                            except ValueError:
-                                print("Solo puede ingresar números enteros")
-                        new_producto = {'nombre' : nombre, 'precio' : precio}
-                        productos.append(new_producto)
-                    else:
-                        break
-            case 2:
-                print("Productos ingresados:")
-                for producto in productos:
-                    print(f"--|{producto['nombre']}, {producto['precio']}")
-            case 3:
-                print("SKU")
-                i = 0
-                for diccionario in productos:
-                    print(f"{i}----{diccionario['nombre']} : {diccionario['precio']}")
-                    i += 1
-                while True:
+                    print("SKU")
+                    i = 0
+                    for producto in productos:
+                        print(f"{i}----{producto['nombre']} : {producto['precio']}")
+                        i += 1
+                    print("Ingresa el SKU del producto que deseas agregar a la canasta")
+                    print("Para volver al menú principal ingresa -> back")
+                    add_producto = input(" : ").lower()
                     try:
-                        del_producto = int(input("Ingresa el SKU del producto que deseas eliminar: "))
-                        if del_producto < 0:
-                            print("No existe el SKU ingresado")
-                            continue
+                        if add_producto != "back":
+                            add_producto = int(add_producto)
+                        if add_producto != "back":
+                            if add_producto < 0:
+                                print("No existe el SKU ingresado")
+                                continue
+                            else:
+                                canasta.append(productos[add_producto])
+                                total_productos_canasta += 1
+                                total_pagar += productos[add_producto]['precio']     
                         else:
-                            del productos[del_producto]
                             break
-                    except (ValueError, IndexError):
-                            print("No existe el SKU ingresado")
-            case 4:
-                print("Saliendo de la tienda...")
+                    except (IndexError):
+                        print("No existe el SKU ingresado")
+                    except (ValueError, TypeError):
+                        print("Ingreso Inválido")
+            case 2:
+                while True:
+                    print("-"*25)
+                    sku = 0
+                    for producto in canasta:
+                        print(f"{sku} {producto['nombre']} : {producto['precio']}")
+                        sku += 1
+                    print(f"Total de productos en canasta: {total_productos_canasta}")
+                    print(f"Total a pagar: {total_pagar}")
+                    volver = int(input("1. Eliminar un producto de la canasta \n2. Volver"))
+                    match volver:
+                        case 1:
+                            eliminar = int(input("¿Ingrese el SKU del producto que desea eliminar: "))
+                            del canasta[eliminar]
+                            total_productos_canasta -= 1
+                            total_pagar -= canasta[eliminar]['precio']
+                        case 2:
+                            break
+                        case _:
+                            print("Ingreso Inválido")
+            case 3:
                 break
             case _:
                 print("Ingreso Inválido")
     except KeyboardInterrupt:
-        print("--[Sistema Bloqueado]--")
-        break
+        print("--|Sistema Bloqueado|--")
+
+
 
