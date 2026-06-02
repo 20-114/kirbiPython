@@ -48,9 +48,9 @@ while True:
                     match volver:
                         case 1:
                             eliminar = int(input("¿Ingrese el SKU del producto que desea eliminar: "))
-                            del canasta[eliminar]
+                            producto_eliminado = canasta.pop(eliminar)
                             total_productos_canasta -= 1
-                            total_pagar -= canasta[eliminar]['precio']
+                            total_pagar -= producto_eliminado['precio']
                         case 2:
                             break
                         case _:
@@ -61,6 +61,4 @@ while True:
                 print("Ingreso Inválido")
     except KeyboardInterrupt:
         print("--|Sistema Bloqueado|--")
-
-
-
+        break
