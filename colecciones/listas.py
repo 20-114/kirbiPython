@@ -40,8 +40,57 @@ Vale decir, Diego Robles, Adolfo Hinako, Luis Mussolini
 # for d in datos:
 #     print(d)
 
-matrix = [
-    [5,8,3], [79,34,24]
+# matrix = [
+#     [5,8,3], [79,34,24]
+# ]
+# print(matrix[1][0])
+
+# matrix = [
+#     {'nombre': 'Rafa', 'notas': [45]},
+#     {'nombre': 'Jorge', 'notas': [50]},
+#     {'nombre': 'Ale', 'notas': [24]}
+# ]
+# dic = [
+#     {'nombre': 'Rafa', 'notas': [45]},
+#     {'nombre': 'Jorge', 'notas': [50]},
+#     {'nombre': 'Ale', 'notas': [24]}
+# ]
+# dic = [
+    # {
+    #     'nombre': 'Rafa', 
+    #     'notas': [45]
+    # },
+    # {'nombre': 'Jorge', 
+    #  'notas': [30]
+    # }
+# ]
+# for indx, elemento in enumerate(dic):
+#     elemento['notas'].
+
+# print(dic)
+
+# 1. Tu estructura de datos inicial
+personas = [
+    {
+        'nombre': 'Rafa', 
+        'notas': [45]
+    },
+    {'nombre': 'Jorge', 
+     'notas': [30]
+    }
 ]
-print(matrix[1][0])
+
+# 2. La lista de nuevos elementos que quieres añadir
+nuevas_notas = 10
+nombre = "Jorge"
+# 3. Recorremos la lista con un for usando 'enumerate' para tener el índice
+for indice, elemento in enumerate(personas):
+    # Accedemos a la lista dentro del diccionario usando la clave y el índice
+    # nuevo_elemento = nuevas_notas[indice]
+    if nombre == elemento['nombre']:
+        elemento['notas'].append(nuevas_notas)
+
+# 4. Resultado final
+print(personas)
+
 
