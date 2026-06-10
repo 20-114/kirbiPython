@@ -1,3 +1,7 @@
+pkes = [
+    
+]
+
 pokemons = {
     1:{'nombre': 'Eevee',
        'nlv' : 14,
