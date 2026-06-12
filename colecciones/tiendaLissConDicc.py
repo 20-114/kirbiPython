@@ -1,11 +1,10 @@
 productosListDicc = [
     {'nombre' : 'Maracuya', 'precio' : 3000},
-    {'nombre' : 'Pera', 'precio' : 3000},
+    {'nombre' : 'Pera', 'precio' : 2500},
     {'nombre' : 'Cebolla', 'precio' : 3000}
 ]
 
 canasta = []
-total = 0
 def agregarVegetal():
     print("-"*25)
     agregarVeg = input("Ingrese un vegetal: ")
@@ -39,15 +38,33 @@ def mostrarVegetales():
         print(f"{productosListDicc.index(nombre)}.- {nombre['nombre']} = {nombre['precio']}")
 
 def mostrar_boleta():
-    print("-"*25)
+    print("-"*25, 0, "-"*25)
+    iva = 1.19
+    total = 0
     for producto in canasta:
-        print(producto)
+        print(producto['nombre'], ":", producto['precio'])
+        total += producto['precio']
+    total_con_iva = total * iva
+    print("-"*25, 0, "-"*25)
+    print(f"Total sin iva: {total} pesos")
+    print(f"Total a pagar: {total_con_iva} pesos")
 
 def comprar_productos():
-    mostrarVegetales()
-    productos = int(input("Ingrese el número del producto que desea comrpar"))
-    canasta.append({productosListDicc[productos]['nombre'] : productosListDicc[productos]['precio']})
-    mostrar_boleta()
+    while True:
+        mostrarVegetales()
+        print("Escribe EXIT para salir")
+        try:
+            productos = input("Ingrese el número del producto que desea comrpar: ").upper()
+            if productos.isdigit():
+                productos = int(productos)
+                canasta.append(productosListDicc[productos])
+            elif productos == "EXIT":
+                break
+            else:
+                print("Ingreso Inválido")
+        except IndexError:
+            print("El producto ingresado no existe")
+            continue
 
 def vegetalesMenuList():
     while True:
@@ -58,25 +75,28 @@ def vegetalesMenuList():
         print("3. Actualizar vegetales")
         print("4. Mostrar vegetales")
         print("5. Comprar Productos")
-        print("6.  Salir")
-        op = int(input("Selecciona un aopción: "))
-        match op:
-            case 1:
-                agregarVegetal()
-            case 2:
-                eliminarVegetal()
-            case 3:
-                actualizarVegetales()
-            case 4:
-                mostrarVegetales()
-            case 5:
-                comprar_productos()
-            case 6:
-                break
-            case _:
-                print("Opción Inválida")
-        # except:
-        #     print("Opción indálida")
+        print("6. Crear Boleta (calcula IVA) y Salir")
+        try:
+            op = input('Selecciona una opción: ')
+            match op:
+                case '1':
+                    agregarVegetal()
+                case '2':
+                    eliminarVegetal()
+                case '3':
+                    actualizarVegetales()
+                case '4':
+                    mostrarVegetales()
+                case '5':
+                    comprar_productos()
+                case '6':
+                    mostrar_boleta()
+                    break
+                case _:
+                    print("Opción Inválida")
+        except KeyboardInterrupt:
+            print("Sistema Bloqueado")
+            break
 
 vegetalesMenuList()
 
