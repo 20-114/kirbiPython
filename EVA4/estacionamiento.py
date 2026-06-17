@@ -32,9 +32,6 @@ ligeros = []
 medianos = []
 pesados = []
 
-cant_lig = 0
-cant_med = 0
-cant_pes = 0
 
 total = 0
 
